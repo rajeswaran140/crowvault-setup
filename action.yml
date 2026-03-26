@@ -1,0 +1,37 @@
+name: 'CrowVault Setup'
+description: 'Install CrowVault CLI and authenticate — 325 AI-powered dev tools for your CI/CD pipeline'
+author: 'TechSynergy Corp.'
+branding:
+  icon: 'terminal'
+  color: 'purple'
+
+inputs:
+  api-key:
+    description: 'CrowVault API key (cv_...)'
+    required: true
+  version:
+    description: 'CLI version to install (default: latest)'
+    required: false
+    default: 'latest'
+  api-url:
+    description: 'CrowVault API URL (default: https://api.crowvault.ai)'
+    required: false
+    default: 'https://api.crowvault.ai'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install CrowVault CLI
+      shell: bash
+      run: npm install -g crowvault@${{ inputs.version }}
+
+    - name: Configure authentication
+      shell: bash
+      run: |
+        echo "CROWVAULT_API_KEY=${{ inputs.api-key }}" >> $GITHUB_ENV
+        echo "CROWVAULT_API_URL=${{ inputs.api-url }}" >> $GITHUB_ENV
+
+    - name: Verify connection
+      shell: bash
+      run: |
+        crowvault servers > /dev/null 2>&1 && echo "✅ CrowVault connected — 325 tools ready" || echo "⚠️ CrowVault connection failed — check your API key"
