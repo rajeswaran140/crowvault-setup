@@ -5,7 +5,7 @@ Install and authenticate the [CrowVault](https://crowvault.ai) CLI in your GitHu
 ## Usage
 
 ```yaml
-- uses: crowvault/setup@v1
+- uses: rajeswaran140/crowvault-setup@v1
   with:
     api-key: ${{ secrets.CROWVAULT_API_KEY }}
 
@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: crowvault/setup@v1
+      - uses: rajeswaran140/crowvault-setup@v1
         with:
           api-key: ${{ secrets.CROWVAULT_API_KEY }}
       - run: crowvault schema Order --format prisma --output ./prisma/schema.prisma
@@ -54,7 +54,7 @@ jobs:
   scaffold:
     runs-on: ubuntu-latest
     steps:
-      - uses: crowvault/setup@v1
+      - uses: rajeswaran140/crowvault-setup@v1
         with:
           api-key: ${{ secrets.CROWVAULT_API_KEY }}
       - run: crowvault workflow run microservice-scaffold --arg name=orders --arg language=node --output result.json
@@ -63,7 +63,7 @@ jobs:
 ### Batch generation
 
 ```yaml
-- uses: crowvault/setup@v1
+- uses: rajeswaran140/crowvault-setup@v1
   with:
     api-key: ${{ secrets.CROWVAULT_API_KEY }}
 - run: |

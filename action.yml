@@ -23,15 +23,29 @@ runs:
   steps:
     - name: Install CrowVault CLI
       shell: bash
-      run: npm install -g crowvault@${{ inputs.version }}
+      run: |
+        echo "Installing crowvault@${{ inputs.version }}..."
+        npm install -g crowvault@${{ inputs.version }} 2>&1 || {
+          echo "::error::Failed to install CrowVault CLI. Ensure Node.js 18+ is available."
+          exit 1
+        }
 
     - name: Configure authentication
       shell: bash
       run: |
+        echo "::add-mask::${{ inputs.api-key }}"
         echo "CROWVAULT_API_KEY=${{ inputs.api-key }}" >> $GITHUB_ENV
         echo "CROWVAULT_API_URL=${{ inputs.api-url }}" >> $GITHUB_ENV
 
     - name: Verify connection
       shell: bash
+      env:
+        CROWVAULT_API_KEY: ${{ inputs.api-key }}
+        CROWVAULT_API_URL: ${{ inputs.api-url }}
       run: |
-        crowvault servers > /dev/null 2>&1 && echo "✅ CrowVault connected — 325 tools ready" || echo "⚠️ CrowVault connection failed — check your API key"
+        if crowvault servers > /dev/null 2>&1; then
+          echo "✅ CrowVault connected — 325 tools ready"
+        else
+          echo "::error::CrowVault connection failed. Check your API key."
+          exit 1
+        fi
