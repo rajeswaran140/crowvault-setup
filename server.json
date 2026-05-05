@@ -1,0 +1,46 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.rajeswaran140/crowvault",
+  "description": "327 AI-powered developer tools via REST API and native MCP protocol. Generate production-ready Dockerfiles, K8s manifests, database schemas, API endpoints, Terraform modules, test suites, and more — across 9 specialized servers.",
+  "repository": {
+    "url": "https://github.com/rajeswaran140/crowvault-setup",
+    "source": "github"
+  },
+  "version": "2.2.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "crowvault",
+      "version": "2.2.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "description": "CrowVault API key (starts with cv_). Get one free at https://crowvault.ai/dashboard",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true,
+          "name": "CROWVAULT_API_KEY"
+        }
+      ]
+    }
+  ],
+  "tools": [
+    { "name": "generate_dockerfile", "description": "Generate optimized multi-stage Dockerfile for any stack" },
+    { "name": "design_schema", "description": "Design a database schema with DDD aggregate mapping" },
+    { "name": "generate_helm_chart", "description": "Generate Helm chart for Kubernetes deployment" },
+    { "name": "generate_api_endpoint", "description": "Generate REST API endpoint with validation and OpenAPI docs" },
+    { "name": "generate_terraform_module", "description": "Generate Terraform module for cloud infrastructure" },
+    { "name": "generate_jest_test", "description": "Generate Jest test suite for any function or module" },
+    { "name": "generate_oauth2_middleware", "description": "Generate OAuth2 authentication middleware" },
+    { "name": "generate_react_component", "description": "Generate React component with hooks and styling" },
+    { "name": "generate_cloud_run_service", "description": "Generate GCP Cloud Run service configuration" }
+  ],
+  "remotes": [
+    {
+      "transportType": "https",
+      "url": "https://api.crowvault.ai/mcp"
+    }
+  ]
+}
