@@ -96,6 +96,35 @@ jobs:
 - `deploy-stack` — Dockerfile + Compose + K8s + Helm (4 steps)
 - `database-setup` — Schema + ORM + migration + seed (4 steps)
 
+## Use as an MCP server
+
+CrowVault is also a remote MCP server (Streamable HTTP), listed in the
+[official MCP Registry](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.rajeswaran140/crowvault)
+as `io.github.rajeswaran140/crowvault`. Nothing to install.
+
+**Claude Code**
+
+```bash
+claude mcp add --transport http crowvault https://api.crowvault.ai/mcp \
+  --header "Authorization: Bearer $CROWVAULT_API_KEY"
+```
+
+**Cursor, Windsurf, VS Code and other MCP clients** (`.mcp.json` / `mcp.json`)
+
+```json
+{
+  "mcpServers": {
+    "crowvault": {
+      "type": "http",
+      "url": "https://api.crowvault.ai/mcp",
+      "headers": { "Authorization": "Bearer YOUR_CROWVAULT_API_KEY" }
+    }
+  }
+}
+```
+
+All 379 tools appear as native MCP tools.
+
 ## Get an API Key
 
 1. Sign up free at [crowvault.ai/register](https://crowvault.ai/register?plan=free) (50 calls/month)
