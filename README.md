@@ -77,7 +77,7 @@ jobs:
 
 | Command | Description |
 |---------|-------------|
-| `crowvault servers` | List 9 MCP servers (327 tools) |
+| `crowvault servers` | List 10 MCP servers (379 tools) |
 | `crowvault tools --search <query>` | Search tools |
 | `crowvault call <server> <tool> --arg key=value` | Call any tool |
 | `crowvault schema <name>` | Generate database schema |
